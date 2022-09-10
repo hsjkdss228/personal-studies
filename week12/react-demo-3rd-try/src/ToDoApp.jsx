@@ -4,7 +4,7 @@ import ToDoList from './ToDoList';
 
 export default function ToDoApp() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: 'inu goroshi' }]);
+    { id: 1, title: 'inu love' }]);
 
   const addTask = (title) => {
     const latestTask = tasks[tasks.length - 1] || { id: 0 };
