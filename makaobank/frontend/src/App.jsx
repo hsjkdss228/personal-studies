@@ -1,14 +1,23 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { Reset } from 'styled-reset';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+import { useState } from 'react';
 
 import Header from './components/Header';
+
+import Button from './components/ui/Button';
+import PrimaryButton from './components/ui/PrimaryButton';
+import SecondaryButton from './components/ui/SecondaryButton';
 
 import AccountPage from './pages/AccountPage';
 import HomePage from './pages/HomePage';
 import TransactionsPage from './pages/Transasctions';
 import TransferPage from './pages/TransferPage';
+
+import defaultTheme from './styles/defaultTheme';
+import darkTheme from './styles/darkTheme';
 
 import GlobalStyle from './styles/GlobalStyle';
 
@@ -17,13 +26,37 @@ const Main = styled.main`
 `;
 
 export default function App() {
+  const [theme, setTheme] = useState(defaultTheme);
+
   // const Component = useRouteComponent();
 
+  const toggleTheme = () => {
+    setTheme(theme === defaultTheme ? darkTheme : defaultTheme);
+  };
+
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <Reset />
       <GlobalStyle />
       <Header />
+      <Button
+        type="button"
+        onClick={toggleTheme}
+      >
+        Toggle theme
+      </Button>
+      <PrimaryButton
+        type="button"
+        onClick={toggleTheme}
+      >
+        Toggle theme
+      </PrimaryButton>
+      <SecondaryButton
+        type="button"
+        onClick={toggleTheme}
+      >
+        Toggle theme
+      </SecondaryButton>
       <Main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -32,6 +65,6 @@ export default function App() {
           <Route path="/transactions" element={<TransactionsPage />} />
         </Routes>
       </Main>
-    </div>
+    </ThemeProvider>
   );
 }
