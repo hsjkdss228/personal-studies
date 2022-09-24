@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Reset } from 'styled-reset';
 import styled, { ThemeProvider } from 'styled-components';
 
-import { useState } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 import Header from './components/Header';
 
@@ -26,13 +26,15 @@ const Main = styled.main`
 `;
 
 export default function App() {
-  const [theme, setTheme] = useState(defaultTheme);
+  const [themeName, setThemeName] = useLocalStorage('theme', 'default');
 
   // const Component = useRouteComponent();
 
   const toggleTheme = () => {
-    setTheme(theme === defaultTheme ? darkTheme : defaultTheme);
+    setThemeName(themeName === 'default' ? 'dark' : 'default');
   };
+
+  const theme = themeName === 'dark' ? darkTheme : defaultTheme;
 
   return (
     <ThemeProvider theme={theme}>
