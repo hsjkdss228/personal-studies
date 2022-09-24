@@ -1,3 +1,5 @@
+import { apiService } from '../services/ApiService';
+
 export default class BankStore {
   constructor() {
     this.name = '';
@@ -6,13 +8,22 @@ export default class BankStore {
     this.transactions = [];
   }
 
-  login({ accountNumber, password }) {
-    // TODO: 서버에서 정보를 가져와야 함
-    if (accountNumber !== '1234') {
-      return;
-    }
+  async login({ accountNumber, password }) {
+    try {
+      const { accessToken, name, amount } = await apiService.postSession({
+        accountNumber, password,
+      });
 
-    this.name = 'Tester';
-    this.amount = 100_000;
+      this.name = name;
+      this.amount = amount;
+
+      return accessToken;
+    } catch (exception) {
+      // console.error(exception);
+
+      return '';
+    }
   }
 }
+
+export const bankStore = new BankStore();
