@@ -1,9 +1,9 @@
 package kr.megaptera.makaobank.dtos;
 
 public class AccountDto {
-  private String accountNumber;
-  private String name;
-  private long amount;
+  private final String accountNumber;
+  private final String name;
+  private final long amount;
 
   public AccountDto(String accountNumber, String name, long amount) {
     this.accountNumber = accountNumber;
